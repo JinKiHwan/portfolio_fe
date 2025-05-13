@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { checkAuthAndRedirect } from '../../utils/auth';
 
 function AdminPosts() {
     const [posts, setPosts] = useState([]);
@@ -21,6 +22,10 @@ function AdminPosts() {
         };
 
         fetchPosts();
+    }, []);
+
+    useEffect(() => {
+        checkAuthAndRedirect(); // 로그인 체크 & 만료되면 로그인 페이지로 이동
     }, []);
 
     return (
