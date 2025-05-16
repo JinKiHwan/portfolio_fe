@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import styled from '@emotion/styled';
+import Main from '../../components/Main';
 
 function Home() {
     const boxRef = useRef();
@@ -12,9 +13,8 @@ function Home() {
     return (
         <>
             <Container>
-                <section>
-                    <Box ref={boxRef}>움직이는 박스</Box>
-                </section>
+                <Main></Main>
+                <section>{/* <Box ref={boxRef}>움직이는 박스</Box> */}</section>
                 <section>2</section>
                 <section>3</section>
             </Container>
@@ -30,7 +30,6 @@ const Container = styled.div`
     section {
         min-height: 100vh;
         width: 100%;
-        border: 1px solid #f00;
     }
 
     &::after {
@@ -46,13 +45,6 @@ const Container = styled.div`
         background: url('/img/overlay.gif');
         opacity: 0.05;
     }
-`;
-
-const Box = styled.div`
-    width: 100px;
-    height: 100px;
-    background: tomato;
-    margin: 50px;
 `;
 
 export default Home;
