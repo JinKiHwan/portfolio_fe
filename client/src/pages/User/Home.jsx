@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import styled from '@emotion/styled';
 import Main from '../../components/Main';
+import GPT from '../../components/GPT';
 
 function Home() {
     const boxRef = useRef();
@@ -14,7 +15,7 @@ function Home() {
         <>
             <Container>
                 <Main></Main>
-                <section>{/* <Box ref={boxRef}>움직이는 박스</Box> */}</section>
+                <GPT></GPT>
                 <section>2</section>
                 <section>3</section>
             </Container>
@@ -25,11 +26,20 @@ function Home() {
 const Container = styled.div`
     width: 100%;
     position: relative;
-    background: #0e100f;
+    background: #000;
     z-index: 0;
     section {
-        min-height: 100vh;
+        aspect-ratio: 16/9;
         width: 100%;
+    }
+
+    .inner {
+        width: 95%;
+        max-width: 1200px;
+        margin: 0 auto;
+        min-height: 100%;
+        position: relative;
+        z-index: 0;
     }
 
     &::after {
