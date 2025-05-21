@@ -22,7 +22,7 @@ export const AnimationProvider = ({ children }) => {
                     duration: 1,
                     ease: 'power2.out',
                 },
-                '-=0.5'
+                '-=0.8'
             );
     };
 
