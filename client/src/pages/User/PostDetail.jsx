@@ -1,4 +1,4 @@
-function Home() {
+function PostDetail() {
     return (
         <div>
             <h2>PostDetail</h2>
@@ -6,4 +6,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default PostDetail;

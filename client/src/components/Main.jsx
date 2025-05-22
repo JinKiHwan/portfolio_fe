@@ -65,25 +65,31 @@ function Main() {
                                 spaceBetween={15}
                                 slidesPerView={1.5}
                                 autoplay={{
-                                    delay: 3000,
+                                    delay: 0,
                                     disableOnInteraction: false,
                                 }}
+                                speed={5000}
                                 loop={true}>
-                                <SwiperSlide>React.js</SwiperSlide>
                                 <SwiperSlide>Vue.js</SwiperSlide>
+                                <SwiperSlide>React.js</SwiperSlide>
                                 <SwiperSlide>Node.js</SwiperSlide>
                                 <SwiperSlide>GSAP</SwiperSlide>
                             </Swiper>
                         </SwiperBox>
                     </div>
                 </div>
-
                 <div className="title">
-                    <p>
+                    {/* <p>
                         <span ref={titleRef1}> 오늘도 좋은날입니다</span>
                     </p>
                     <p>
                         <span ref={titleRef2}> 웹개발자 진기환입니다</span>
+                    </p> */}
+                    <p>
+                        <span ref={titleRef1}> azxbasdqwe</span>
+                    </p>
+                    <p>
+                        <span ref={titleRef2}> QWERTYUYIASD</span>
                     </p>
                 </div>
 
@@ -201,6 +207,9 @@ const SwiperBox = styled.div`
     padding-left: 0.5vw;
     &.show {
         opacity: 1;
+    }
+    .swiper-wrapper {
+        transition-timing-function: linear;
     }
     .swiper-slide {
         background: #111;

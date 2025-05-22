@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import styled from '@emotion/styled';
 import Header from '../../components/Header';
 import Main from '../../components/Main';
+import About from '../../components/AboutMe';
 
 function Home() {
     const boxRef = useRef();
@@ -16,6 +17,7 @@ function Home() {
             <Container>
                 <Header></Header>
                 <Main></Main>
+                <About></About>
                 <section>2</section>
                 <section>3</section>
             </Container>
@@ -38,6 +40,7 @@ const Container = styled.div`
     .inner {
         width: 62.5vw;
         max-width: 95%;
+        height: 100%;
         margin: 0 auto;
         min-height: 100%;
         position: relative;

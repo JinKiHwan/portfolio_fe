@@ -9,10 +9,10 @@ function Header() {
                 </h1>
                 <ul>
                     <li className="active">
-                        <a href="#!">1</a>
+                        <a href="#main">1</a>
                     </li>
                     <li>
-                        <a href="#!">2</a>
+                        <a href="#about">2</a>
                     </li>
                     <li>
                         <a href="#!">3</a>
