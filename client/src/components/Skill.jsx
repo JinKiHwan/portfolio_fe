@@ -39,12 +39,15 @@ export default function Skill() {
 
                         requestAnimationFrame(() => {
                             gsap.to('.cursor', {
-                                delay: 2,
-                                scale: 10,
+                                delay: 3,
+                                animation: 'none',
+                                scale: 1000,
+                                background: '#000',
                             });
                         });
                     },
-                });
+                })
+                .to('body', { height: 'auto', overflow: 'visible' });
         });
 
         return () => ctx.revert();
