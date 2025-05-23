@@ -22,8 +22,8 @@ function Main() {
         const tl = gsap.timeline();
 
         // 초기 등장 애니메이션
-        tl.fromTo(laptopRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1 })
-            .fromTo(mobileRef.current, { x: 100, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, '-=0.8')
+        tl.fromTo(laptopRef.current, { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 1 })
+            .fromTo(mobileRef.current, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, '<')
             .fromTo(titleRef1.current, { yPercent: 100 }, { yPercent: 0 }, '<')
             .fromTo(titleRef2.current, { yPercent: 100 }, { delay: 0.3, yPercent: 0 }, '<')
             // 타이핑 효과

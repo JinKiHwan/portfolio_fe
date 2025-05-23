@@ -1,29 +1,82 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Header from '../../components/Header';
 import Main from '../../components/Main';
 import About from '../../components/AboutMe';
+import Skill from '../../components/Skill';
 
 function Home() {
-    const boxRef = useRef();
+    const [loading, setLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        gsap.to(boxRef.current, { x: 200, duration: 1 });
+        let progressValue = 0;
+        const increment = () => {
+            if (progressValue < 100) {
+                progressValue += Math.random() * 10;
+                setProgress(Math.min(progressValue, 100));
+            }
+        };
+
+        const interval = setInterval(increment, 100);
+
+        const timer = setTimeout(() => {
+            clearInterval(interval);
+            setProgress(100);
+            setTimeout(() => setLoading(false), 300); // slight delay to finish bar animation
+        }, 1200); // 최소 1.2초 보장
+
+        return () => {
+            clearTimeout(timer);
+            clearInterval(interval);
+        };
     }, []);
 
+    if (loading) {
+        return (
+            <LoadingScreen>
+                <div className="progress-container">
+                    <div className="progress-bar" style={{ width: `${progress}%` }} />
+                    <p>Loading... {Math.floor(progress)}%</p>
+                </div>
+            </LoadingScreen>
+        );
+    }
+
     return (
-        <>
-            <Container>
-                <Header></Header>
-                <Main></Main>
-                <About></About>
-                <section>2</section>
-                <section>3</section>
-            </Container>
-        </>
+        <Container>
+            <Header />
+            <Main />
+            <About />
+            <Skill />
+            <section></section>
+            <section></section>
+        </Container>
     );
 }
+
+const LoadingScreen = styled.div`
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    color: #39ff14;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'D2Coding';
+
+    .progress-container {
+        text-align: center;
+        width: 300px;
+    }
+
+    .progress-bar {
+        height: 3px;
+        background: #39ff14;
+        transition: width 0.3s ease;
+        margin-bottom: 10px;
+    }
+`;
 
 const Container = styled.div`
     width: 100%;
@@ -59,38 +112,6 @@ const Container = styled.div`
         z-index: 10;
         background: url('/img/overlay.gif');
         opacity: 0.05;
-    }
-
-    @font-face {
-        font-family: 'PartialSansKR-Regular';
-        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSansKR-Regular.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-    }
-    @font-face {
-        font-family: 'Pretendard-Regular';
-        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-        font-weight: 400;
-        font-style: normal;
-    }
-
-    @font-face {
-        font-family: 'D2Coding';
-        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-    @font-face {
-        font-family: 'GongGothicMedium';
-        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-    @font-face {
-        font-family: 'BMDOHYEON';
-        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
     }
 `;
 
