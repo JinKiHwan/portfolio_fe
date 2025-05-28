@@ -19,7 +19,7 @@ function Header() {
                         setActive(index);
                     },
                     onEnterBack: () => setActive(index),
-                    markers: true, // 디버깅 시 사용
+                    //markers: true, // 디버깅 시 사용
                 });
             });
 
@@ -112,6 +112,11 @@ const HeaderWrap = styled.div`
 
                     img {
                         opacity: 0.3;
+                    }
+                }
+                &:hover {
+                    img {
+                        opacity: 1;
                     }
                 }
 

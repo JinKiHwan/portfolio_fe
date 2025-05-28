@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Header from '../../components/Header';
-import Main from '../../components/Main';
+import MainComp from '../../components/MainComp';
 import About from '../../components/AboutMe';
 import Skill from '../../components/Skill';
 
@@ -23,8 +23,8 @@ function Home() {
         const timer = setTimeout(() => {
             clearInterval(interval);
             setProgress(100);
-            setTimeout(() => setLoading(false), 300); // slight delay to finish bar animation
-        }, 1200); // 최소 1.2초 보장
+            setTimeout(() => setLoading(false), 300);
+        }, 1200);
 
         return () => {
             clearTimeout(timer);
@@ -45,8 +45,8 @@ function Home() {
 
     return (
         <Container>
-            <Header />
-            <Main />
+            {/* <Header /> */}
+            <MainComp />
             <About />
             <Skill />
             <section></section>
@@ -111,7 +111,7 @@ const Container = styled.div`
         pointer-events: none;
         z-index: 10;
         background: url('/img/overlay.gif');
-        opacity: 0.05;
+        opacity: 0.01;
     }
 `;
 
