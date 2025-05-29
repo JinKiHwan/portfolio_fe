@@ -1,20 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from '@emotion/styled';
+import LoadingScreen from '../../components/LoadingScreen';
 import Header from '../../components/Header';
+import Digimon from '../../components/Digimon';
+import Background from '../../components/Background';
 import MainComp from '../../components/MainComp';
 import About from '../../components/AboutMe';
 import Skill from '../../components/Skill';
 
+import { playIntroTimeline } from '../../utils/animation';
+
 function Home() {
+    /* ///////////////// */
+    /* Loading Animation */
+    /* ///////////////// */
+
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
-
+    const [isStarted, setIsStarted] = useState(false);
+    const progressRef = useRef(0);
     useEffect(() => {
-        let progressValue = 0;
         const increment = () => {
-            if (progressValue < 100) {
-                progressValue += Math.random() * 10;
-                setProgress(Math.min(progressValue, 100));
+            if (progressRef.current < 100) {
+                progressRef.current += Math.random() * 10;
+                const clamped = Math.min(progressRef.current, 100);
+                setProgress(clamped); // 화면에 보이는 퍼센트
             }
         };
 
@@ -27,56 +37,54 @@ function Home() {
         }, 1200);
 
         return () => {
-            clearTimeout(timer);
             clearInterval(interval);
+            clearTimeout(timer);
         };
     }, []);
 
-    if (loading) {
-        return (
-            <LoadingScreen>
-                <div className="progress-container">
-                    <div className="progress-bar" style={{ width: `${progress}%` }} />
-                    <p>Loading... {Math.floor(progress)}%</p>
-                </div>
-            </LoadingScreen>
-        );
+    const handleStart = () => {
+        if (!bgRef.current || !mainRef.current) {
+            console.warn('bgRef or mainRef is not ready yet');
+            return;
+        }
+
+        playIntroTimeline(bgRef.current, mainRef.current);
+
+        const audio1 = new Audio('/sound/degivice.mp3');
+        audio1.play();
+        setTimeout(() => {
+            const audio2 = new Audio('/sound/degivice.mp3');
+            audio2.play();
+        }, 300);
+
+        setIsStarted(true);
+    };
+
+    /* //////////////// */
+    /* Intro Animation */
+    /* /////////////// */
+    const bgRef = useRef(null);
+    const mainRef = useRef(null);
+    useEffect(() => {
+        if (!loading) {
+            playIntroTimeline(bgRef.current, mainRef.current);
+        }
+    }, [loading]);
+
+    if (loading || !isStarted) {
+        return <LoadingScreen loading={loading} isStarted={isStarted} onStart={handleStart} progress={progress} />;
     }
 
     return (
         <Container>
-            {/* <Header /> */}
-            <MainComp />
-            <About />
-            <Skill />
+            <Digimon></Digimon>
+            <Background ref={bgRef} />
+            <MainComp ref={mainRef} />
             <section></section>
             <section></section>
         </Container>
     );
 }
-
-const LoadingScreen = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    color: #39ff14;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'D2Coding';
-
-    .progress-container {
-        text-align: center;
-        width: 300px;
-    }
-
-    .progress-bar {
-        height: 3px;
-        background: #39ff14;
-        transition: width 0.3s ease;
-        margin-bottom: 10px;
-    }
-`;
 
 const Container = styled.div`
     width: 100%;
