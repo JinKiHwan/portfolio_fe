@@ -65,6 +65,11 @@ const Container = styled.section`
             top: 50%;
             width: 4vw;
             transform: translate(-50%, calc(-50% - 1vw));
+
+            img {
+                animation: egg 1s steps(1) infinite;
+                transform-origin: center bottom;
+            }
         }
 
         &:hover {
@@ -72,6 +77,16 @@ const Container = styled.section`
                 opacity: 1;
                 box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5), -10px 10px 10px rgba(255, 255, 255, 0.5),
                     10px -10px 10px rgba(255, 255, 255, 0.5), -10px -10px 10px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        @keyframes egg {
+            0%,
+            100% {
+                transform: scale(1, 1);
+            }
+            50% {
+                transform: scale(1, 0.95);
             }
         }
     }
